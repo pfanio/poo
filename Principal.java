@@ -1,15 +1,112 @@
 
+import java.util.Scanner;
+
 public class Principal {
 
     public static void main(String[] args) {
-        
-        Conta c1 = new Conta(1000.00, "123", "Paulo", "3500-X");
-        c1.depositar(100);
-        c1.sacar(50);
-        
-        System.out.println(c1.toString());
-        c1.alterarTitular("Severino");
-        System.out.println(c1.toString());
-        
+
+        Scanner teclado = new Scanner(System.in);
+        Conta poupanca, corrente;
+        int opcao;
+        double valor;
+        poupanca = new Conta();
+        corrente = new Conta();
+        do {
+            System.out.println("1 - Cadastrar Poupança");
+            System.out.println("2 - Cadastrar Corrente");
+            System.out.println("3 - Depositar Poupança");
+            System.out.println("4 - Depositar Corrente");
+            System.out.println("5 - Sacar Poupança");
+            System.out.println("6 - Sacar Corrente");
+            System.out.println("7 - Transf. C->P");
+            System.out.println("8 - Transf. P->C");
+            System.out.println("0 - Consulta ");
+            System.out.println("9 - Sair");
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite saldo");
+                    poupanca.setSaldo(teclado.nextDouble());
+                    teclado.nextLine();
+
+                    System.out.println("Digite nº poupanca");
+                    poupanca.setNumero(teclado.nextLine());
+
+                    System.out.println("Digite titular poupanca");
+                    poupanca.setTitular(teclado.nextLine());
+
+                    System.out.println("Digite agencia poupanca");
+                    poupanca.setAgencia(teclado.nextLine());
+                    break;
+
+                case 2:
+                    System.out.println("Digite saldo");
+                    corrente.setSaldo(teclado.nextDouble());
+                    teclado.nextLine();
+
+                    System.out.println("Digite nº corrente");
+                    corrente.setNumero(teclado.nextLine());
+
+                    System.out.println("Digite titular corrente");
+                    corrente.setTitular(teclado.nextLine());
+
+                    System.out.println("Digite agencia corrente");
+                    corrente.setAgencia(teclado.nextLine());
+                    break;
+
+                case 3:
+                    System.out.println("Quanto deseja depositar?");
+                    poupanca.depositar(teclado.nextDouble());
+                    teclado.nextLine();
+                    break;
+                    
+                case 4:
+                    System.out.println("Quanto deseja depositar?");
+                    corrente.depositar(teclado.nextDouble());
+                    teclado.nextLine();
+                    break;
+                    
+                case 5:
+                    System.out.println("Quanto deseja sacar?");
+                    poupanca.sacar(teclado.nextDouble());
+                    teclado.nextLine();
+                    break;
+                    
+                case 6:
+                    System.out.println("Quanto deseja sacar?");
+                    corrente.sacar(teclado.nextDouble());
+                    teclado.nextLine();
+                    break;
+                
+                case 7:
+                    System.out.println("Quanto deseja transferir?");
+                    valor = teclado.nextDouble();
+                    teclado.nextLine();
+                    corrente.sacar(valor);
+                    poupanca.depositar(valor);
+                    break;
+                    
+                case 8:
+                    System.out.println("Quanto deseja transferir?");
+                    valor = teclado.nextDouble();
+                    teclado.nextLine();
+                    poupanca.sacar(valor);
+                    corrente.depositar(valor);
+                    break;
+                
+                case 9: break;
+                
+                default: 
+                    System.out.println("Digite uma opcao valida, seu bandido!");
+                    break;
+                    
+                case 0:
+                    System.out.println(poupanca.toString());
+                    System.out.println(corrente.toString());
+                    break;
+                    
+            }
+        } while (opcao != 9);
     }
 }

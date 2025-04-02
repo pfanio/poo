@@ -5,6 +5,8 @@ public class Conta {
     private String titular;
     private String agencia;
 
+    public Conta(){}
+    
     public Conta(double saldo, String numero, String titular, String agencia) {
         this.saldo = saldo;
         this.numero = numero;
