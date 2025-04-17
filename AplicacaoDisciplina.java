@@ -10,6 +10,8 @@ public class AplicacaoDisciplina {
         int dia, mes, ano, codigo, qtdAlunos;
         String nome, curso;
         
+        Professor.boasVindas();
+        
         Data dataAdm = preencheData(teclado); 
         Departamento dpt = preencheDepartamento(teclado);
         Professor professor = preencheProfessor(teclado, dataAdm, dpt);
@@ -70,5 +72,35 @@ public class AplicacaoDisciplina {
         teclado.nextLine();
         Data dataAdm = new Data(dia, mes, ano);
         return dataAdm;
+    }
+    
+    public static void alteraDadosGerais(Disciplina d){
+    
+        String nome;
+        String curso;
+        int qtdAlunos;
+        Scanner teclado = new Scanner(System.in);
+        
+        System.out.println("Digite o nome da disciplina");
+        nome = teclado.nextLine();
+        System.out.println("Digite o curso da disciplina");
+        curso = teclado.nextLine();
+        System.out.println("Digite a quantidade de alunos da disciplina");
+        qtdAlunos = teclado.nextInt();
+        
+        d.setCurso(curso);
+        d.setNome(nome);
+        d.setQuantidadeAlunos(qtdAlunos);
+    }
+    
+    public static void alteraProfessor(Disciplina d){
+        
+        Scanner teclado = new Scanner(System.in);
+        
+        Data novaDataAdm = preencheData(teclado);
+        Departamento novoDepartamento = preencheDepartamento(teclado);
+        Professor novoProf = preencheProfessor(teclado, novaDataAdm, novoDepartamento);
+        
+        d.setProfessor(novoProf);
     }
 }
