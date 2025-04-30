@@ -11,7 +11,8 @@ public class AplicacaoCadastroFuncionarios {
         int codigo;
         double salario, percentual;
         CadastroFuncionarios bancoDeDados = new CadastroFuncionarios();
-
+        Contratado c1 = new Vendedor(0.1,123,"Jose",2000);
+        
         do {
             System.out.println("1 - Inserir");
             System.out.println("2 - Buscar");

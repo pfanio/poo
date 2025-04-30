@@ -1,4 +1,4 @@
-public class Funcionario {
+public abstract class Funcionario {
 
     private int codigo;
     private String nome;
@@ -34,5 +34,7 @@ public class Funcionario {
         this.salario = salario;
     }
     
+    public abstract double calcularFerias();
+        
     
 }

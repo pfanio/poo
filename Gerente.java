@@ -14,6 +14,11 @@ public class Gerente extends Funcionario{
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
+
+    @Override
+    public double calcularFerias() {
+        return this.getSalario() + 10000 + 5000 + 3000;
+    }
     
     
 }
