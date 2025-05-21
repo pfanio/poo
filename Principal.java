@@ -69,8 +69,8 @@ public class Principal {
                         System.out.println("Quanto deseja depositar?");
                         corrente.depositar(teclado.nextDouble());
                     }catch (ValorNegativoException ex){
-                        System.out.println("Mensagem: " + exception.getMessage());
-                        System.out.println("Hora erro: " + exception.horaEvento);
+                        System.out.println("Mensagem: " + ex.getMessage());
+                        System.out.println("Hora erro: " + ex.horaEvento);
                     }
                     teclado.nextLine();
                     break;
