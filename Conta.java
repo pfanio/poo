@@ -19,8 +19,13 @@ public class Conta {
         return "Conta{" + "\nsaldo=" + saldo + "\nnumero=" + numero + "\ntitular=" + titular + "\nagencia=" + agencia + "\n}";
     }
 
-    public void depositar (double valor){
-        saldo = saldo + valor;
+    public void depositar (double valor) throws ValorNegativoException{
+        if(valor > 0){
+            saldo = saldo + valor;
+        }
+        else{
+            throw new ValorNegativoException();
+        }
     }
     
     public void sacar(double valor) throws SaldoInsuficienteException{
