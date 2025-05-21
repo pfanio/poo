@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Principal {
 
-    public static void main(String[] args) throws SaldoInsuficienteException {
+    public static void main(String[] args) throws SaldoInsuficienteException, ValorNegativoException {
 
         Scanner teclado = new Scanner(System.in);
         Conta poupanca, corrente;
@@ -11,6 +11,7 @@ public class Principal {
         double valor;
         poupanca = new Conta();
         corrente = new Conta();
+        boolean sacou;
                 
         
         do {
@@ -64,19 +65,34 @@ public class Principal {
                     break;
                     
                 case 4:
-                    System.out.println("Quanto deseja depositar?");
-                    corrente.depositar(teclado.nextDouble());
+                    try{
+                        System.out.println("Quanto deseja depositar?");
+                        corrente.depositar(teclado.nextDouble());
+                    }catch (ValorNegativoException ex){
+                        System.out.println("Mensagem: " + exception.getMessage());
+                        System.out.println("Hora erro: " + exception.horaEvento);
+                    }
                     teclado.nextLine();
                     break;
                     
                 case 5:
-                    System.out.println("Quanto deseja sacar?");
-                    poupanca.sacar(teclado.nextDouble());
+                    sacou = false;
+                    do{
+                        try{
+                            System.out.println("Quanto deseja sacar?");
+                            poupanca.sacar(teclado.nextDouble());
+                            sacou = true;
+                        }catch(SaldoInsuficienteException exception){
+                            System.out.println("Mensagem: " + exception.getMessage());
+                            System.out.println("Hora erro: " + exception.horaEvento);
+                            System.out.println("Seu saldo atual: "+ poupanca.getSaldo());
+                        }
+                    }while(!sacou && poupanca.getSaldo() > 0);
                     teclado.nextLine();
                     break;
                     
                 case 6:
-                    boolean sacou = false;
+                    sacou = false;
                     do{
                         try{
                             System.out.println("Quanto deseja sacar?");
@@ -87,16 +103,26 @@ public class Principal {
                             System.out.println("Hora erro: " + exception.horaEvento);
                             System.out.println("Seu saldo atual: "+ corrente.getSaldo());
                         }
-                    }while(!sacou);
+                    }while(!sacou && poupanca.getSaldo() > 0);
                     teclado.nextLine();
                     break;
                 
                 case 7:
-                    System.out.println("Quanto deseja transferir?");
-                    valor = teclado.nextDouble();
+                    sacou = false;
+                    do{
+                        try{
+                            System.out.println("Quanto deseja transferir?");
+                            valor = teclado.nextDouble();
+                            corrente.sacar(valor);
+                            poupanca.depositar(valor);
+                            sacou = true;
+                        }catch(SaldoInsuficienteException exception){
+                            System.out.println("Mensagem: " + exception.getMessage());
+                            System.out.println("Hora erro: " + exception.horaEvento);
+                            System.out.println("Seu saldo atual: "+ corrente.getSaldo());
+                        }
+                    }while(!sacou && corrente.getSaldo() > 0);
                     teclado.nextLine();
-                    corrente.sacar(valor);
-                    poupanca.depositar(valor);
                     break;
                     
                 case 8:
